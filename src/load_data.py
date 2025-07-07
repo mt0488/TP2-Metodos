@@ -46,3 +46,6 @@ def split_dataset(healthy_dir, parkinson_dir, test_ratio=0.2, size=(64, 64), see
     X_test, y_test = zip(*test)
 
     return np.array(X_train), np.array(y_train), np.array(X_test), np.array(y_test)
+
+def normalizar_dataset(X):
+    return X / 255.0
