@@ -1,16 +1,16 @@
 
 import matplotlib.pyplot as plt
     
-def plot_loss(loss_train, loss_test = None, title= "Evolución del error cuadrático"):
+def plot_loss(loss_train, loss_test = None, title= "Evolución del error cuadrático", gd= True, lw=2):
     epochs = list(range(1, len(loss_train) + 1))
     plt.figure(figsize=(6, 4))
     plt.plot(epochs, loss_train, label="Train", color="teal", linewidth=2)
     if loss_test is not None:
-        plt.plot(epochs, loss_test, label="Test", color="indianred", linestyle="--", linewidth=2)
+        plt.plot(epochs, loss_test, label="Test", color="indianred", linestyle="--", linewidth=lw)
         
     plt.title(title, fontsize= 13)
     plt.xlabel("Época", fontsize= 12)
-    plt.ylabel("Loss (EC)", fontsize= 12)
+    plt.ylabel("Loss (EC)" if gd else "Loss (BCE)", fontsize= 12)
     plt.legend(fontsize= 13)
     plt.xticks(fontsize=10)
     plt.yticks(fontsize=10)
@@ -23,8 +23,7 @@ colors_named = [
 ]
 
 
-
-def plot_train_test_metrics(results, plot_train = False, plot_test = True):
+def plot_metrics_by_alpha(results, plot_train = False, plot_test = True, title1="Pérdida Error Cuadrático", title2= "Accuracy", gd=True):
     # --- Loss ---
     plt.figure(figsize=(8, 5))
     for idx, (alpha, hist) in enumerate(results.items()):
@@ -35,9 +34,9 @@ def plot_train_test_metrics(results, plot_train = False, plot_test = True):
         if plot_test:
             plt.plot(epochs, hist['loss_test'], linestyle='--' if plot_train else '-', label=f"Test loss (α={alpha})", color=color)
 
-    plt.title("Pérdida Error Cuadrático: Train vs Test", fontsize= 16)
+    plt.title(title1, fontsize= 16)
     plt.xlabel("Épocas", fontsize= 14)
-    plt.ylabel("SE (Squared Errors)", fontsize= 14)
+    plt.ylabel("SE (Squared Errors)" if gd else "BCE (Binary-cross entropy)", fontsize= 14)
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
     plt.legend(fontsize=11)
@@ -52,7 +51,7 @@ def plot_train_test_metrics(results, plot_train = False, plot_test = True):
             plt.plot(epochs, hist['acc_train'], label=f"Train acc (α={alpha})", color=color)
         if plot_test:
             plt.plot(epochs, hist['acc_test'], linestyle='--' if plot_train else '-', label=f"Test  acc (α={alpha})", color=color)
-    plt.title("Accuracy: Train vs Test", fontsize= 16)
+    plt.title(title2, fontsize= 16)
     plt.xlabel("Épocas", fontsize= 14)
     plt.ylabel("Accuracy", fontsize= 14)
     plt.xticks(fontsize=12)
