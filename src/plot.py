@@ -1,32 +1,22 @@
 
 import matplotlib.pyplot as plt
-
-def plot_loss(loss_history_train):
-    plt.plot(loss_history_train)
-    plt.xlabel("Época")
-    plt.ylabel("Pérdida cuadrática")
-    plt.title("Evolución de la pérdida durante el entrenamiento")
-    plt.grid(True)
-    plt.show()
     
-def plot_loss_train_test(loss_train, loss_test):
+def plot_loss(loss_train, loss_test = None, title= "Evolución del error cuadrático"):
     epochs = list(range(1, len(loss_train) + 1))
-    plt.plot(epochs, loss_train, label="Train", color="blue")
-    plt.plot(epochs, loss_test, label="Test", color="red", linestyle="--")
-    plt.title("Error cuadrático: Train vs Test")
-    plt.xlabel("Época")
-    plt.ylabel("Loss (EC)")
-    plt.legend()
+    plt.plot(epochs, loss_train, label="Train", color="mediumaquamarine", linewidth=1.5)
+    if loss_test is not None:
+        plt.plot(epochs, loss_test, label="Test", color="slateblue", linestyle="--", linewidth=1.5)
+        
+    plt.title(title, fontsize= 16)
+    plt.xlabel("Época", fontsize= 14)
+    plt.ylabel("Loss (EC)", fontsize= 14)
+    plt.legend(fontsize= 15)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
     plt.grid(True)
     plt.show()
 
 def plot_train_test_metrics(results, plot_train = False, plot_test = True):
-    """
-    Grafica:
-    1. Evolución de la pérdida (loss) en train y test para cada alpha.
-    2. Evolución de la accuracy en train y test para cada alpha.
-    """
-
     # --- Loss ---
     plt.figure(figsize=(8, 5))
     for alpha, hist in results.items():
