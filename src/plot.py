@@ -40,7 +40,7 @@ def plot_train_test_metrics(results, plot_train = False, plot_test = True):
     plt.ylabel("SE (Squared Errors)", fontsize= 14)
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
-    plt.legend(fontsize=10)
+    plt.legend(fontsize=11)
     plt.grid(True)
 
     # --- Accuracy ---
@@ -57,7 +57,7 @@ def plot_train_test_metrics(results, plot_train = False, plot_test = True):
     plt.ylabel("Accuracy", fontsize= 14)
     plt.xticks(fontsize=12)
     plt.yticks(fontsize=12)
-    plt.legend(fontsize=10)
+    plt.legend(fontsize=11)
     plt.grid(True)
 
     plt.show()
